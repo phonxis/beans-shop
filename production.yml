@@ -14,9 +14,29 @@ services:
     depends_on:
       - postgres
       - redis
-    env_file:
-      - ./.envs/.production/.django
-      - ./.envs/.production/.postgres
+    #env_file:
+    #  - ./.envs/.production/.django
+    #  - ./.envs/.production/.postgres
+    environment:
+      - DJANGO_SETTINGS_MODULE=config.settings.production
+      - DJANGO_SECRET_KEY=QcaR2ZWqaorkN52ueIRkM3bfCK8aotgud9ABkeqbInhG3Li23hJsNs2JpQM0X4ac
+      - DJANGO_ADMIN_URL=gG1lPTPACQQu6hYm0faZXr49IuI6YwfZ/
+      - DJANGO_ALLOWED_HOSTS=.example.com
+      - DJANGO_SECURE_SSL_REDIRECT=False
+      - DJANGO_SERVER_EMAIL=""
+      - SENDINBLUE_API_KEY=""
+      - GOOGLE_APPLICATION_CREDENTIALS=""
+      - DJANGO_GCP_STORAGE_BUCKET_NAME=""
+      - DJANGO_ACCOUNT_ALLOW_REGISTRATION=True
+      - WEB_CONCURRENCY=4
+      - REDIS_URL=redis://redis:6379/0
+      - CELERY_FLOWER_USER=debug
+      - CELERY_FLOWER_PASSWORD=debug
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=beans_shop
+      - POSTGRES_USER=debug
+      - POSTGRES_PASSWORD=debug
     command: /start
 
   postgres:
@@ -27,8 +47,28 @@ services:
     volumes:
       - production_postgres_data:/var/lib/postgresql/data
       - production_postgres_data_backups:/backups
-    env_file:
-      - ./.envs/.production/.postgres
+    #env_file:
+    #  - ./.envs/.production/.postgres
+    environment:
+      - DJANGO_SETTINGS_MODULE=config.settings.production
+      - DJANGO_SECRET_KEY=QcaR2ZWqaorkN52ueIRkM3bfCK8aotgud9ABkeqbInhG3Li23hJsNs2JpQM0X4ac
+      - DJANGO_ADMIN_URL=gG1lPTPACQQu6hYm0faZXr49IuI6YwfZ/
+      - DJANGO_ALLOWED_HOSTS=.example.com
+      - DJANGO_SECURE_SSL_REDIRECT=False
+      - DJANGO_SERVER_EMAIL=""
+      - SENDINBLUE_API_KEY=""
+      - GOOGLE_APPLICATION_CREDENTIALS=""
+      - DJANGO_GCP_STORAGE_BUCKET_NAME=""
+      - DJANGO_ACCOUNT_ALLOW_REGISTRATION=True
+      - WEB_CONCURRENCY=4
+      - REDIS_URL=redis://redis:6379/0
+      - CELERY_FLOWER_USER=debug
+      - CELERY_FLOWER_PASSWORD=debug
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=beans_shop
+      - POSTGRES_USER=debug
+      - POSTGRES_PASSWORD=debug
 
   #traefik:
   #  build:
