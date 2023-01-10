@@ -10,7 +10,7 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/django/Dockerfile
-    image: beans_shop_production_django
+    image: phonxis/beans_shop_production_django:latest
     depends_on:
       - postgres
       - redis
@@ -23,33 +23,48 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
-    image: beans_shop_production_postgres
+    image: phonxis/beans_shop_production_postgres:latest
     volumes:
       - production_postgres_data:/var/lib/postgresql/data
       - production_postgres_data_backups:/backups
     env_file:
       - ./.envs/.production/.postgres
 
-  traefik:
+  #traefik:
+  #  build:
+  #    context: .
+  #    dockerfile: ./compose/production/traefik/Dockerfile
+  #  image: beans_shop_production_traefik
+  #  depends_on:
+  #    - django
+  #  volumes:
+  #    - production_traefik:/etc/traefik/acme
+  #  ports:
+  #    - "0.0.0.0:80:80"
+  #    - "0.0.0.0:443:443"
+  #    - "0.0.0.0:5555:5555"
+
+  nginx:
     build:
       context: .
-      dockerfile: ./compose/production/traefik/Dockerfile
-    image: beans_shop_production_traefik
+      dockerfile: ./compose/production/nginx/Dockerfile
+    image: phonxis/beans_shop_production_nginx:latest
+    volumes:
+      - /var/www/django-static:/static
+      - /var/www/django-media:/media
+    expose:
+      - 1337
+    ports:
+      - 127.0.0.1:1337:80
     depends_on:
       - django
-    volumes:
-      - production_traefik:/etc/traefik/acme
-    ports:
-      - "0.0.0.0:80:80"
-      - "0.0.0.0:443:443"
-      - "0.0.0.0:5555:5555"
 
   redis:
     image: redis:6
 
   celeryworker:
     <<: *django
-    image: beans_shop_production_celeryworker
+    image: phonxis/beans_shop_production_celeryworker:latest
     command: /start-celeryworker
 
   #celerybeat:
