@@ -4,6 +4,11 @@ volumes:
   production_postgres_data: {}
   production_postgres_data_backups: {}
   production_traefik: {}
+  nginx_conf:
+  static:
+  media:
+  certbot-www:
+  certbot-conf:
 
 services:
   django: &django
@@ -11,6 +16,7 @@ services:
       context: .
       dockerfile: ./compose/production/django/Dockerfile
     image: phonxis/beans_shop_production_django:latest
+    container_name: django
     depends_on:
       - postgres
       - redis
@@ -38,12 +44,22 @@ services:
       - POSTGRES_USER=debug
       - POSTGRES_PASSWORD=debug
     command: /start
+    restart: always
+    volumes:
+      - static:/static
+      - media:/media
+    links:
+      - postgres:postgres
+    networks:
+      - app_network
 
   postgres:
     build:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
     image: phonxis/beans_shop_production_postgres:latest
+    container_name: postgresql
+    restart: always
     volumes:
       - production_postgres_data:/var/lib/postgresql/data
       - production_postgres_data_backups:/backups
@@ -69,6 +85,8 @@ services:
       - POSTGRES_DB=beans_shop
       - POSTGRES_USER=debug
       - POSTGRES_PASSWORD=debug
+    networks:
+      - app_network
 
   #traefik:
   #  build:
@@ -89,30 +107,69 @@ services:
       context: .
       dockerfile: ./compose/production/nginx/Dockerfile
     image: phonxis/beans_shop_production_nginx:latest
-    volumes:
-      - /var/www/django-static:/static
-      - /var/www/django-media:/media
+    container_name: nginx
+    restart: always
     expose:
-      - 1337
+      - 80
+      - 443
     ports:
-      - 127.0.0.1:1337:80
+      - 80:80
+      - 443:443
+    volumes:
+      - nginx_conf:/etc/nginx/conf.d
+      - static:/static
+      - media:/media
+      - certbot-www:/var/www/certbot/:ro
+      - certbot-conf:/etc/nginx/ssl/:ro
     depends_on:
       - django
+    networks:
+      - app_network
+
+  #certbot:
+  #  image: certbot/certbot:latest
+  #  container_name: certbot
+  #  volumes:
+  #    - certbot-www:/var/www/certbot/:rw
+  #    - certbot-conf:/etc/letsencrypt/:rw
+  #    - /root:/var/lib/letsencrypt
+  #  command: certonly --webroot -w /var/www/certbot --force-renewal --email phonxis@gmail.com -d rizhplatizh.com.ua -d trendshunters.rizhplatizh.com.ua --agree-tos
 
   redis:
     image: redis:6
+    container_name: redis
+    networks:
+      - app_network
 
   celeryworker:
     <<: *django
     image: phonxis/beans_shop_production_celeryworker:latest
+    container_name: celeryworker
     command: /start-celeryworker
+    env_file: stack.env
+    depends_on:
+      - django
+      - redis
+    networks:
+      - app_network
 
-  #celerybeat:
-  #  <<: *django
-  #  image: beans_shop_production_celerybeat
-  #  command: /start-celerybeat
+  celerybeat:
+    <<: *django
+    image: beans_shop_production_celerybeat
+    container_name: celerybeat
+    command: /start-celerybeat
+    depends_on:
+      - django
+      - redis
+      - postgres
+    networks:
+      - app_network
 
   #flower:
   #  <<: *django
   #  image: beans_shop_production_flower
   #  command: /start-flower
+
+networks:
+  app_network:
+    driver: bridge
