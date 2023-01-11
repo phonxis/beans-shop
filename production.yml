@@ -154,7 +154,7 @@ services:
 
   celerybeat:
     <<: *django
-    image: beans_shop_production_celerybeat
+    image: phonxis/beans_shop_production_celerybeat:latest
     container_name: celerybeat
     command: /start-celerybeat
     depends_on:
