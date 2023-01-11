@@ -146,7 +146,6 @@ services:
     image: phonxis/beans_shop_production_celeryworker:latest
     container_name: celeryworker
     command: /start-celeryworker
-    env_file: stack.env
     depends_on:
       - django
       - redis
