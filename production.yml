@@ -126,14 +126,14 @@ services:
     networks:
       - app_network
 
-  #certbot:
-  #  image: certbot/certbot:latest
-  #  container_name: certbot
-  #  volumes:
-  #    - certbot-www:/var/www/certbot/:rw
-  #    - certbot-conf:/etc/letsencrypt/:rw
-  #    - /root:/var/lib/letsencrypt
-  #  command: certonly --webroot -w /var/www/certbot --force-renewal --email phonxis@gmail.com -d rizhplatizh.com.ua -d trendshunters.rizhplatizh.com.ua --agree-tos
+  certbot:
+    image: certbot/certbot:latest
+    container_name: certbot
+    volumes:
+      - certbot-www:/var/www/certbot/:rw
+      - certbot-conf:/etc/letsencrypt/:rw
+      - /root:/var/lib/letsencrypt
+    command: certonly --webroot -w /var/www/certbot --force-renewal --email phonxis@gmail.com -d beans.phonxis.online --agree-tos
 
   redis:
     image: redis:6
