@@ -36,7 +36,7 @@ jobs:
           echo DJANGO_SETTINGS_MODULE=config.settings.production >> .env
           echo DJANGO_SECRET_KEY=QcaR2ZWqaorkN52ueIRkM3bfCK8aotgud9ABkeqbInhG3Li23hJsNs2JpQM0X4ac >> .env
           echo DJANGO_ADMIN_URL=gG1lPTPACQQu6hYm0faZXr49IuI6YwfZ/ >> .env
-          echo DJANGO_ALLOWED_HOSTS=.example.com >> .env
+          echo DJANGO_ALLOWED_HOSTS=.beans.phonxis.online >> .env
           echo DJANGO_SECURE_SSL_REDIRECT=False >> .env
           echo DJANGO_SERVER_EMAIL="" >> .env
           echo SENDINBLUE_API_KEY="" >> .env
