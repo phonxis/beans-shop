@@ -92,6 +92,6 @@ RUN chown django:django ${APP_HOME}
 # RUN chmod -R 777 /app/staticfiles
 # RUN chmod -R 777 /app/media
 
-USER django
+# USER django
 
 ENTRYPOINT ["/entrypoint"]
