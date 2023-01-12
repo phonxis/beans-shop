@@ -53,6 +53,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 # APPS
 # ------------------------------------------------------------------------------
 DJANGO_APPS = [
+    "jet.dashboard",
     "jet",
     "django.contrib.auth",
     "django.contrib.contenttypes",
