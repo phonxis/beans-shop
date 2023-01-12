@@ -54,6 +54,7 @@ jobs:
           echo POSTGRES_PASSWORD=debug >> .env
           echo DATABASE_URL=postgres://debug:debug@$localhost:5432/beans_shop >> .env
           echo USE_DOCKER=yes >> .env
+          echo CELERY_BROKER_URL=redis://redis:6379/0 >> .env
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
