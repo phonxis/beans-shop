@@ -52,6 +52,8 @@ jobs:
           echo POSTGRES_DB=beans_shop >> .env
           echo POSTGRES_USER=debug >> .env
           echo POSTGRES_PASSWORD=debug >> .env
+          echo DATABASE_URL=postgres://debug:debug@$localhost:5432/beans_shop >> .env
+          echo USE_DOCKER=yes >> .env
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
