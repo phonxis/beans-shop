@@ -46,8 +46,8 @@ services:
     command: /start
     restart: always
     volumes:
-      - static:/app/staticfiles
-      - media:/media
+      - static:/app/static
+      - media:/app/media
     links:
       - postgres:postgres
     networks:
