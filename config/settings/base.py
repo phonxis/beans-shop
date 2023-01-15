@@ -79,6 +79,8 @@ LOCAL_APPS = [
     "beans_shop.users",
     "beans_shop.warehouse",
     "beans_shop.orders",
+    "beans_shop.restocks",
+    "beans_shop.write_offs",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -308,3 +310,5 @@ SOCIALACCOUNT_FORMS = {"signup": "beans_shop.users.forms.UserSocialSignupForm"}
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+TELEGRAM_CHAT_ID = "-895716193"  # Beans warehouse
+TELEGRAM_BOT_TOKEN = "5847490458:AAEvUtLrDep9OhglaSKdGIgAHORQGgwDM9A"
