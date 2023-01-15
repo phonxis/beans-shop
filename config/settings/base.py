@@ -72,10 +72,13 @@ THIRD_PARTY_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "django_celery_beat",
+    "solo",
 ]
 
 LOCAL_APPS = [
     "beans_shop.users",
+    "beans_shop.warehouse",
+    "beans_shop.orders",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
