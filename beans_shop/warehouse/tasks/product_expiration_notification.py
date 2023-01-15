@@ -23,7 +23,7 @@ class ProductExpirationNotificationTask(Task):
             bot = Bot(settings.TELEGRAM_BOT_TOKEN)
             async_to_sync(bot.get_me())
             for product in exp_products:
-                async_to_sync(bot.send_message(text=f"{product.name} - {self.expiration_dt.strftime('%d %b, %Y')}",
+                async_to_sync(bot.send_message(text=f"{product.name} - {product.expiration_dt.strftime('%d %b, %Y')}",
                                                chat_id=settings.TELEGRAM_CHAT_ID))
 
 
