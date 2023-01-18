@@ -14,6 +14,7 @@ urlpatterns = [
     path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
     # Django Admin, use {% url 'admin:index' %}
     # path(settings.ADMIN_URL, admin.site.urls),
+    path("api/", include("beans_shop.api.urls")),
     path("", admin.site.urls),
     # User management
     path("users/", include("beans_shop.users.urls", namespace="users")),
