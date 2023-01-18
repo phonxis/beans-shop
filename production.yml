@@ -148,28 +148,28 @@ services:
     networks:
       - app_network
 
-  celeryworker:
-    <<: *django
-    image: phonxis/beans_shop_production_celeryworker:latest
-    container_name: celeryworker
-    command: /start-celeryworker
-    depends_on:
-      - django
-      - redis
-    networks:
-      - app_network
+  #celeryworker:
+  #  <<: *django
+  #  image: phonxis/beans_shop_production_celeryworker:latest
+  #  container_name: celeryworker
+  #  command: /start-celeryworker
+  #  depends_on:
+  #    - django
+  #    - redis
+  #  networks:
+  #    - app_network
 
-  celerybeat:
-    <<: *django
-    image: phonxis/beans_shop_production_celerybeat:latest
-    container_name: celerybeat
-    command: /start-celerybeat
-    depends_on:
-      - django
-      - redis
-      - postgres
-    networks:
-      - app_network
+  #celerybeat:
+  #  <<: *django
+  #  image: phonxis/beans_shop_production_celerybeat:latest
+  #  container_name: celerybeat
+  #  command: /start-celerybeat
+  #  depends_on:
+  #    - django
+  #    - redis
+  #    - postgres
+  #  networks:
+  #    - app_network
 
   #flower:
   #  <<: *django
