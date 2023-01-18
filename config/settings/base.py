@@ -311,5 +311,5 @@ SOCIALACCOUNT_FORMS = {"signup": "beans_shop.users.forms.UserSocialSignupForm"}
 
 # Your stuff...
 # ------------------------------------------------------------------------------
-TELEGRAM_CHAT_ID = "-895716193"  # Beans warehouse
-TELEGRAM_BOT_TOKEN = "5847490458:AAEvUtLrDep9OhglaSKdGIgAHORQGgwDM9A"
+TELEGRAM_CHAT_ID = env("TELEGRAM_CHAT_ID", default="")  # Beans warehouse
+TELEGRAM_BOT_TOKEN = env("TELEGRAM_BOT_TOKEN", default="")

@@ -25,7 +25,7 @@ services:
     #  - ./.envs/.production/.postgres
     environment:
       - DJANGO_SETTINGS_MODULE=config.settings.production
-      - DJANGO_SECRET_KEY=QcaR2ZWqaorkN52ueIRkM3bfCK8aotgud9ABkeqbInhG3Li23hJsNs2JpQM0X4ac
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
       - DJANGO_ADMIN_URL=gG1lPTPACQQu6hYm0faZXr49IuI6YwfZ/
       - DJANGO_ALLOWED_HOSTS=beans.phonxis.online
       - DJANGO_SECURE_SSL_REDIRECT=False
@@ -36,13 +36,16 @@ services:
       - DJANGO_ACCOUNT_ALLOW_REGISTRATION=True
       - WEB_CONCURRENCY=4
       - REDIS_URL=redis://redis:6379/0
-      - CELERY_FLOWER_USER=debug
-      - CELERY_FLOWER_PASSWORD=debug
+      - CELERY_FLOWER_USER=${CELERY_FLOWER_USER}
+      - CELERY_FLOWER_PASSWORD=${CELERY_FLOWER_PASSWORD}
       - POSTGRES_HOST=postgres
       - POSTGRES_PORT=5432
-      - POSTGRES_DB=beans_shop
-      - POSTGRES_USER=debug
-      - POSTGRES_PASSWORD=debug
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+      - DATABASE_URL=${DATABASE_URL}
     command: /start
     restart: always
     volumes:
@@ -67,7 +70,7 @@ services:
     #  - ./.envs/.production/.postgres
     environment:
       - DJANGO_SETTINGS_MODULE=config.settings.production
-      - DJANGO_SECRET_KEY=QcaR2ZWqaorkN52ueIRkM3bfCK8aotgud9ABkeqbInhG3Li23hJsNs2JpQM0X4ac
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
       - DJANGO_ADMIN_URL=gG1lPTPACQQu6hYm0faZXr49IuI6YwfZ/
       - DJANGO_ALLOWED_HOSTS=beans.phonxis.online
       - DJANGO_SECURE_SSL_REDIRECT=False
@@ -78,13 +81,16 @@ services:
       - DJANGO_ACCOUNT_ALLOW_REGISTRATION=True
       - WEB_CONCURRENCY=4
       - REDIS_URL=redis://redis:6379/0
-      - CELERY_FLOWER_USER=debug
-      - CELERY_FLOWER_PASSWORD=debug
+      - CELERY_FLOWER_USER=${CELERY_FLOWER_USER}
+      - CELERY_FLOWER_PASSWORD=${CELERY_FLOWER_PASSWORD}
       - POSTGRES_HOST=postgres
       - POSTGRES_PORT=5432
-      - POSTGRES_DB=beans_shop
-      - POSTGRES_USER=debug
-      - POSTGRES_PASSWORD=debug
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+      - DATABASE_URL=${DATABASE_URL}
     networks:
       - app_network
 
@@ -138,6 +144,7 @@ services:
   redis:
     image: redis:6
     container_name: redis
+    restart: always
     networks:
       - app_network
 
