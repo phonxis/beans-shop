@@ -139,7 +139,8 @@ services:
       - certbot-www:/var/www/certbot/:rw
       - certbot-conf:/etc/letsencrypt/:rw
       - /root:/var/lib/letsencrypt
-    command: certonly --webroot -w /var/www/certbot --force-renewal --email phonxis@gmail.com -d beans.phonxis.online -d beans.phonxis.xyz --agree-tos
+    #command: certonly --webroot -w /var/www/certbot --force-renewal --email phonxis@gmail.com -d beans.phonxis.online -d beans.phonxis.xyz --agree-tos
+    command: certonly --webroot -w /var/www/certbot --force-renewal --email phonxis@gmail.com -d beans.phonxis.xyz --agree-tos
 
   redis:
     image: redis:6
