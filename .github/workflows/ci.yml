@@ -42,7 +42,7 @@ jobs:
           echo DJANGO_SETTINGS_MODULE=config.settings.production >> .env
           echo DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY >> .env
           echo DJANGO_ADMIN_URL=gG1lPTPACQQu6hYm0faZXr49IuI6YwfZ/ >> .env
-          echo DJANGO_ALLOWED_HOSTS=beans.phonxis.online >> .env
+          echo DJANGO_ALLOWED_HOSTS=beans.phonxis.xyz >> .env
           echo DJANGO_SECURE_SSL_REDIRECT=False >> .env
           echo DJANGO_SERVER_EMAIL="" >> .env
           echo SENDINBLUE_API_KEY="" >> .env
